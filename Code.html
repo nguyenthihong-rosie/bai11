@@ -1,0 +1,506 @@
+<!doctype html>
+<html lang="vi">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mô hình hộp và Bố cục trang web</title>
+  <style>
+        body {
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        body.ready {
+            opacity: 1;
+        }
+    </style>
+  <script>
+        window.addEventListener("load", () => {
+            document.body.classList.add("ready");
+        });
+    </script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        
+        .page-transition {
+            opacity: 1;
+        }
+        
+        .page-hidden {
+            display: none !important;
+            opacity: 0 !important;
+        }
+        
+        .content-show {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.4s ease;
+        }
+        
+        .content-hide {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+        
+        .group-selected {
+            border: 3px solid #10b981;
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+        }
+        
+        .group-dimmed {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        
+        .box-model-diagram {
+            background: linear-gradient(45deg, #f3f4f6, #e5e7eb);
+            border: 2px dashed #6b7280;
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="min-h-full bg-gradient-to-br from-blue-50 to-indigo-100">
+  <div class="container mx-auto px-4 py-8 max-w-6xl"><!-- Nút Trang chủ - hiển thị trên tất cả trang trừ trang giới thiệu -->
+   <div id="home-button-container" class="hidden mb-6"><button id="home-btn" class="bg-gray-600 hover:bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg transition-colors shadow-md flex items-center gap-2"> 🏠 Trang chủ </button>
+   </div><!-- Trang giới thiệu -->
+   <div id="intro-page" class="text-center page-transition content-show">
+    <div class="bg-white rounded-2xl shadow-xl p-8 mb-8">
+     <h1 id="main-title" class="text-4xl font-bold text-gray-800 mb-4">🎨 Bài 11 – Mô hình hộp và Bố cục trang web (Tiết 1)</h1>
+     <p id="lesson-subtitle" class="text-xl text-gray-600 mb-8">Khám phá thế giới thiết kế web thông qua hoạt động nhóm tương tác</p><button id="start-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded-xl text-lg transition-all duration-300 transform hover:scale-105 shadow-lg"> Bắt đầu Hoạt động 2.1 </button>
+    </div>
+   </div><!-- Hoạt động 2.1 - Hội đồng Kiến trúc sư -->
+   <div id="activity-21" class="page-transition page-hidden">
+    <div class="text-center mb-8">
+     <h2 class="text-3xl font-bold text-gray-800 mb-4">🧱 Hoạt động 2.1 – Hội đồng Kiến trúc sư</h2>
+     <p class="text-lg text-gray-600">Chọn nhóm chuyên gia của bạn để bắt đầu khám phá!</p>
+    </div><!-- 3 Cards nhóm chuyên gia -->
+    <div class="grid md:grid-cols-3 gap-6 mb-8"><!-- Nhóm 1: Padding & Border -->
+     <div id="group-1" class="group-card bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-blue-500">
+      <div class="text-center mb-4">
+       <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl">📦</span>
+       </div>
+       <h3 class="text-xl font-bold text-blue-700">Hội đồng 1</h3>
+       <p class="text-blue-600 font-semibold">Padding &amp; Border</p>
+       <p class="text-sm text-gray-500">Nhóm 1 &amp; 2</p>
+      </div><button class="group-select-btn w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg transition-colors" data-group="1"> Tôi thuộc nhóm này </button>
+     </div><!-- Nhóm 2: Margin & Width/Height -->
+     <div id="group-2" class="group-card bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-orange-500">
+      <div class="text-center mb-4">
+       <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl">📏</span>
+       </div>
+       <h3 class="text-xl font-bold text-orange-700">Hội đồng 2</h3>
+       <p class="text-orange-600 font-semibold">Margin &amp; Width/Height</p>
+       <p class="text-sm text-gray-500">Nhóm 3 &amp; 4</p>
+      </div><button class="group-select-btn w-full bg-orange-500 hover:bg-orange-600 text-white py-2 px-4 rounded-lg transition-colors" data-group="2"> Tôi thuộc nhóm này </button>
+     </div><!-- Nhóm 3: Display Block & Inline -->
+     <div id="group-3" class="group-card bg-white rounded-xl shadow-lg p-6 card-hover border-l-4 border-purple-500">
+      <div class="text-center mb-4">
+       <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3"><span class="text-2xl">🧩</span>
+       </div>
+       <h3 class="text-xl font-bold text-purple-700">Hội đồng 3</h3>
+       <p class="text-purple-600 font-semibold">Display: Block &amp; Inline</p>
+       <p class="text-sm text-gray-500">Nhóm 5 &amp; 6</p>
+      </div><button class="group-select-btn w-full bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg transition-colors" data-group="3"> Tôi thuộc nhóm này </button>
+     </div>
+    </div><!-- Nội dung chi tiết từng nhóm --> <!-- Nhóm 1 Detail -->
+    <div id="group-1-detail" class="group-detail page-hidden bg-blue-50 rounded-xl p-6 mb-6 border-2 border-blue-200">
+     <h3 class="text-2xl font-bold text-blue-800 mb-4">🔹 Hội đồng 1 – PADDING và BORDER</h3>
+     <div class="bg-white rounded-lg p-4 mb-4">
+      <p class="text-blue-700 font-semibold mb-2">🎯 Mục tiêu:</p>
+      <p class="text-gray-700 mb-4">Hiểu tác dụng của padding và border trong mô hình hộp.</p>
+      <p class="text-blue-700 font-semibold mb-2">📋 Hướng dẫn:</p>
+      <ol class="list-decimal list-inside text-gray-700 space-y-2 mb-4">
+       <li>Nhấn "Mở Playcode A" để xem ví dụ.</li>
+       <li>Thay đổi giá trị padding và border trong CSS.</li>
+       <li>Quan sát cách khối nội dung thay đổi.</li>
+       <li>Ghi nhận xét và trả lời vào Phiếu học tập: 
+        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+         <li>Khi tăng padding, phần nội dung thay đổi thế nào?</li>
+         <li>Khi tăng border, kích thước hộp thay đổi ra sao?</li>
+        </ul></li>
+      </ol><button class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg mb-4 transition-colors" onclick="window.open('https://playcode.io/2600162', '_blank')"> 🔗 Mở Playcode A </button>
+     </div><button id="complete-group-1" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"> ✅ Hoàn thành nhóm của tôi </button>
+    </div><!-- Nhóm 2 Detail -->
+    <div id="group-2-detail" class="group-detail page-hidden bg-orange-50 rounded-xl p-6 mb-6 border-2 border-orange-200">
+     <h3 class="text-2xl font-bold text-orange-800 mb-4">🔹 Hội đồng 2 – MARGIN và WIDTH/HEIGHT</h3>
+     <div class="bg-white rounded-lg p-4 mb-4">
+      <p class="text-orange-700 font-semibold mb-2">🎯 Mục tiêu:</p>
+      <p class="text-gray-700 mb-4">Phân biệt margin và padding; hiểu vai trò của width, height.</p>
+      <p class="text-orange-700 font-semibold mb-2">📋 Hướng dẫn:</p>
+      <ol class="list-decimal list-inside text-gray-700 space-y-2 mb-4">
+       <li>Nhấn "Mở Playcode B".</li>
+       <li>Thay đổi giá trị margin, width, height.</li>
+       <li>Quan sát khoảng cách và kích thước các khối.</li>
+       <li>Ghi vào Phiếu học tập: 
+        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+         <li>Margin tạo khoảng cách ở đâu?</li>
+         <li>Khi hai hộp gần nhau, margin khác gì padding?</li>
+        </ul></li>
+      </ol><button class="bg-orange-600 hover:bg-orange-700 text-white py-2 px-4 rounded-lg mb-4 transition-colors" onclick="window.open('https://playcode.io/2600165', '_blank')"> 🔗 Mở Playcode B </button>
+     </div><button id="complete-group-2" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"> ✅ Hoàn thành nhóm của tôi </button>
+    </div><!-- Nhóm 3 Detail -->
+    <div id="group-3-detail" class="group-detail page-hidden bg-purple-50 rounded-xl p-6 mb-6 border-2 border-purple-200">
+     <h3 class="text-2xl font-bold text-purple-800 mb-4">🔹 Hội đồng 3 – DISPLAY: BLOCK và INLINE</h3>
+     <div class="bg-white rounded-lg p-4 mb-4">
+      <p class="text-purple-700 font-semibold mb-2">🎯 Mục tiêu:</p>
+      <p class="text-gray-700 mb-4">Phân biệt hiển thị block và inline.</p>
+      <p class="text-purple-700 font-semibold mb-2">📋 Hướng dẫn:</p>
+      <ol class="list-decimal list-inside text-gray-700 space-y-2 mb-4">
+       <li>Nhấn "Mở Playcode C".</li>
+       <li>Quan sát hai phần tử .bl (block) và .il (inline).</li>
+       <li>Thay đổi thuộc tính display và xem sự khác biệt.</li>
+       <li>Trả lời vào Phiếu học tập: 
+        <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
+         <li>Khi đổi display: block thành inline, phần tử thay đổi vị trí không? Vì sao?</li>
+         <li>Nếu muốn văn bản nằm cạnh hình ảnh, nên dùng kiểu nào?</li>
+        </ul></li>
+      </ol><button class="bg-purple-600 hover:bg-purple-700 text-white py-2 px-4 rounded-lg mb-4 transition-colors" onclick="window.open('https://playcode.io/2600170', '_blank')"> 🔗 Mở Playcode C </button>
+     </div><button id="complete-group-3" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"> ✅ Hoàn thành nhóm của tôi </button>
+    </div><!-- Thông báo hoàn thành -->
+    <div id="completion-message" class="page-hidden bg-green-50 border-2 border-green-200 rounded-xl p-6 text-center mb-6">
+     <div class="text-6xl mb-4">
+      🎉
+     </div>
+     <h3 class="text-2xl font-bold text-green-800 mb-2">Rất tốt!</h3>
+     <p class="text-green-700 mb-4">Em đã hoàn thành vai trò chuyên gia. Hãy quay về nhóm Agency của mình để chia sẻ kiến thức.</p><button id="next-to-22" class="bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed" disabled> Chuyển sang Hoạt động 2.2 → </button>
+    </div>
+   </div><!-- Hoạt động 2.2 -->
+   <div id="activity-22" class="page-transition page-hidden">
+    <div class="text-center mb-8">
+     <h2 class="text-3xl font-bold text-gray-800 mb-4">🏗️ Hoạt động 2.2 – Nhận diện bố cục trang web</h2>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+     <h3 class="text-xl font-bold text-gray-800 mb-4">📚 Lý thuyết cơ bản</h3>
+     <div class="grid md:grid-cols-2 gap-4 mb-6">
+      <div class="bg-blue-50 p-4 rounded-lg">
+       <h4 class="font-bold text-blue-800">Header (Đầu trang)</h4>
+       <p class="text-sm text-gray-700">Chứa logo, tiêu đề chính, menu điều hướng</p>
+      </div>
+      <div class="bg-green-50 p-4 rounded-lg">
+       <h4 class="font-bold text-green-800">Navigation (Điều hướng)</h4>
+       <p class="text-sm text-gray-700">Menu, liên kết đến các trang khác</p>
+      </div>
+      <div class="bg-yellow-50 p-4 rounded-lg">
+       <h4 class="font-bold text-yellow-800">Content (Nội dung)</h4>
+       <p class="text-sm text-gray-700">Phần chính chứa thông tin, bài viết</p>
+      </div>
+      <div class="bg-purple-50 p-4 rounded-lg">
+       <h4 class="font-bold text-purple-800">Footer (Chân trang)</h4>
+       <p class="text-sm text-gray-700">Thông tin liên hệ, bản quyền</p>
+      </div>
+     </div>
+     <div class="text-center">
+      <p class="text-gray-600 mb-4">📝 Hãy ghi nhận các phần này vào Phiếu học tập số 2</p><button id="complete-22" class="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"> ✅ Hoàn thành 2.2 </button>
+     </div>
+    </div>
+   </div><!-- Hoạt động 3 -->
+   <div id="activity-3" class="page-transition page-hidden">
+    <div class="text-center mb-8">
+     <h2 class="text-3xl font-bold text-gray-800 mb-4">⚡ Hoạt động 3 – Thử thách tập sự</h2>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+     <h3 class="text-xl font-bold text-gray-800 mb-4">🎯 Nhiệm vụ thực hành</h3>
+     <ol class="list-decimal list-inside text-gray-700 space-y-3 mb-6">
+      <li>Mở link Playcode mẫu (Playcode C – Display + Layout)</li>
+      <li>Viết CSS theo yêu cầu: 
+       <ul class="list-disc list-inside ml-6 mt-2 space-y-1">
+        <li>Khối A: width 300px, background vàng, padding 20px</li>
+        <li>Khối B: border cam nét đứt 5px</li>
+        <li>Khối C: margin-top 40px</li>
+        <li>(Nâng cao) Tất cả: display: inline-block</li>
+       </ul></li>
+      <li>Quan sát kết quả và ghi vào Phiếu học tập số 3</li>
+     </ol>
+     <div class="text-center mb-6"><button class="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-4 rounded-lg transition-colors" onclick="window.open('https://playcode.io/2600191', '_blank')"> 🔗 Mở Playcode C – Display + Layout </button>
+     </div>
+     <div class="text-center"><button id="complete-3" class="bg-green-600 hover:bg-green-700 text-white py-3 px-6 rounded-lg font-semibold transition-colors"> ✅ Hoàn thành 3 </button>
+     </div>
+    </div>
+   </div><!-- Củng cố & Tổng kết -->
+   <div id="summary" class="page-transition page-hidden">
+    <div class="text-center mb-8">
+     <h2 class="text-3xl font-bold text-gray-800 mb-4">📋 Củng cố &amp; Tổng kết</h2>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-6">
+     <h3 class="text-xl font-bold text-gray-800 mb-6 text-center">📦 Sơ đồ Box Model</h3>
+     <div class="box-model-diagram rounded-xl p-8 mb-6 text-center">
+      <div class="bg-red-200 p-4 rounded-lg mb-4">
+       <h4 class="font-bold text-red-800">MARGIN</h4>
+       <p class="text-sm">Khoảng cách ngoài</p>
+       <div class="bg-yellow-200 p-4 rounded-lg mt-2">
+        <h4 class="font-bold text-yellow-800">BORDER</h4>
+        <p class="text-sm">Đường viền</p>
+        <div class="bg-green-200 p-4 rounded-lg mt-2">
+         <h4 class="font-bold text-green-800">PADDING</h4>
+         <p class="text-sm">Khoảng cách trong</p>
+         <div class="bg-blue-200 p-4 rounded-lg mt-2">
+          <h4 class="font-bold text-blue-800">CONTENT</h4>
+          <p class="text-sm">Nội dung</p>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="bg-gray-50 p-4 rounded-lg">
+      <h4 class="font-bold text-gray-800 mb-3">🤔 Câu hỏi ôn tập:</h4>
+      <ol class="list-decimal list-inside text-gray-700 space-y-2">
+       <li>Phần nào tạo khoảng cách ngoài phần tử?</li>
+       <li>Phần nào giúp điều hướng nội dung trang web?</li>
+      </ol>
+     </div>
+     <div class="text-center mt-6">
+      <div class="text-6xl mb-4">
+       🎊
+      </div>
+      <h3 class="text-2xl font-bold text-green-800">Chúc mừng!</h3>
+      <p class="text-gray-600">Em đã hoàn thành bài học về Mô hình hộp và Bố cục trang web!</p>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+        // Cấu hình mặc định
+        const defaultConfig = {
+            main_title: "🎨 Bài 11 – Mô hình hộp và Bố cục trang web (Tiết 1)",
+            lesson_subtitle: "Khám phá thế giới thiết kế web thông qua hoạt động nhóm tương tác",
+            start_button_text: "Bắt đầu Hoạt động 2.1"
+        };
+
+        // Trạng thái ứng dụng
+        let currentPage = 'intro';
+        let selectedGroup = null;
+        let groupCompleted = false;
+
+        // Khởi tạo Element SDK
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig: defaultConfig,
+                onConfigChange: async (config) => {
+                    const titleElement = document.getElementById('main-title');
+                    const subtitleElement = document.getElementById('lesson-subtitle');
+                    const startBtnElement = document.getElementById('start-btn');
+                    
+                    if (titleElement) {
+                        titleElement.textContent = config.main_title || defaultConfig.main_title;
+                    }
+                    if (subtitleElement) {
+                        subtitleElement.textContent = config.lesson_subtitle || defaultConfig.lesson_subtitle;
+                    }
+                    if (startBtnElement) {
+                        startBtnElement.textContent = config.start_button_text || defaultConfig.start_button_text;
+                    }
+                },
+                mapToCapabilities: (config) => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["main_title", config.main_title || defaultConfig.main_title],
+                    ["lesson_subtitle", config.lesson_subtitle || defaultConfig.lesson_subtitle],
+                    ["start_button_text", config.start_button_text || defaultConfig.start_button_text]
+                ])
+            });
+        }
+
+        // Hàm hiển thị trang
+        function showPage(pageId) {
+            const pages = ['intro-page', 'activity-21', 'activity-22', 'activity-3', 'summary'];
+            
+            // Ẩn tất cả trang
+            pages.forEach(id => {
+                const element = document.getElementById(id);
+                if (element && id !== pageId) {
+                    element.classList.add('page-hidden');
+                    element.classList.remove('content-show');
+                }
+            });
+            
+            // Hiển thị trang mục tiêu
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.remove('page-hidden');
+                targetPage.classList.add('content-show');
+            }
+            currentPage = pageId;
+            
+            // Hiển thị/ẩn nút trang chủ
+            const homeButtonContainer = document.getElementById('home-button-container');
+            if (homeButtonContainer) {
+                if (pageId === 'intro-page') {
+                    homeButtonContainer.classList.add('hidden');
+                } else {
+                    homeButtonContainer.classList.remove('hidden');
+                }
+            }
+        }
+
+        // Hàm quay về trang chủ và reset trạng thái
+        function goHome() {
+            // Reset tất cả trạng thái
+            selectedGroup = null;
+            groupCompleted = false;
+            
+            // Xóa dữ liệu localStorage
+            localStorage.removeItem('selectedGroup');
+            localStorage.removeItem('groupCompleted');
+            
+            // Reset giao diện các nhóm
+            const allCards = document.querySelectorAll('.group-card');
+            const allDetails = document.querySelectorAll('.group-detail');
+            const completionMessage = document.getElementById('completion-message');
+            const nextButton = document.getElementById('next-to-22');
+            
+            allCards.forEach(card => {
+                card.classList.remove('group-selected', 'group-dimmed');
+            });
+            
+            allDetails.forEach(detail => {
+                detail.classList.add('page-hidden');
+            });
+            
+            if (completionMessage) {
+                completionMessage.classList.add('page-hidden');
+            }
+            
+            if (nextButton) {
+                nextButton.disabled = true;
+                nextButton.classList.add('disabled:opacity-50', 'disabled:cursor-not-allowed');
+            }
+            
+            // Quay về trang giới thiệu
+            showPage('intro-page');
+        }
+
+        // Hàm chọn nhóm
+        function selectGroup(groupNumber) {
+            selectedGroup = groupNumber;
+            
+            // Ẩn tất cả các card khác và làm mờ
+            const allCards = document.querySelectorAll('.group-card');
+            const allDetails = document.querySelectorAll('.group-detail');
+            
+            allCards.forEach((card, index) => {
+                if (index + 1 !== groupNumber) {
+                    card.classList.add('group-dimmed');
+                } else {
+                    card.classList.add('group-selected');
+                }
+            });
+            
+            // Hiển thị chi tiết nhóm được chọn
+            allDetails.forEach(detail => {
+                detail.classList.add('page-hidden');
+            });
+            
+            const selectedDetail = document.getElementById(`group-${groupNumber}-detail`);
+            if (selectedDetail) {
+                selectedDetail.classList.remove('page-hidden');
+                selectedDetail.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            // Lưu trạng thái
+            localStorage.setItem('selectedGroup', groupNumber.toString());
+        }
+
+        // Hàm hoàn thành nhóm
+        function completeGroup() {
+            groupCompleted = true;
+            
+            // Hiển thị thông báo hoàn thành
+            const completionMessage = document.getElementById('completion-message');
+            const nextButton = document.getElementById('next-to-22');
+            
+            if (completionMessage) {
+                completionMessage.classList.remove('page-hidden');
+                completionMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            
+            if (nextButton) {
+                nextButton.disabled = false;
+                nextButton.classList.remove('disabled:opacity-50', 'disabled:cursor-not-allowed');
+            }
+            
+            localStorage.setItem('groupCompleted', 'true');
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Nút bắt đầu
+            const startBtn = document.getElementById('start-btn');
+            if (startBtn) {
+                startBtn.addEventListener('click', () => showPage('activity-21'));
+            }
+
+            // Nút chọn nhóm
+            const groupSelectBtns = document.querySelectorAll('.group-select-btn');
+            groupSelectBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const groupNumber = parseInt(e.target.dataset.group);
+                    selectGroup(groupNumber);
+                });
+            });
+
+            // Nút hoàn thành nhóm
+            const completeGroupBtns = document.querySelectorAll('[id^="complete-group-"]');
+            completeGroupBtns.forEach(btn => {
+                btn.addEventListener('click', completeGroup);
+            });
+
+            // Nút chuyển sang 2.2
+            const nextTo22Btn = document.getElementById('next-to-22');
+            if (nextTo22Btn) {
+                nextTo22Btn.addEventListener('click', () => showPage('activity-22'));
+            }
+
+            // Nút hoàn thành 2.2
+            const complete22Btn = document.getElementById('complete-22');
+            if (complete22Btn) {
+                complete22Btn.addEventListener('click', () => showPage('activity-3'));
+            }
+
+            // Nút hoàn thành 3
+            const complete3Btn = document.getElementById('complete-3');
+            if (complete3Btn) {
+                complete3Btn.addEventListener('click', () => showPage('summary'));
+            }
+
+            // Nút trang chủ
+            const homeBtn = document.getElementById('home-btn');
+            if (homeBtn) {
+                homeBtn.addEventListener('click', goHome);
+            }
+
+
+
+            // Khôi phục trạng thái từ localStorage
+            const savedGroup = localStorage.getItem('selectedGroup');
+            const savedCompleted = localStorage.getItem('groupCompleted');
+            
+            if (savedGroup) {
+                selectedGroup = parseInt(savedGroup);
+            }
+            
+            if (savedCompleted === 'true') {
+                groupCompleted = true;
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'993dfde5a2bee2e4',t:'MTc2MTM1NjI3OC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
