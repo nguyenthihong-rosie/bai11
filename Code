@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài 11 - Canva Page</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Ẩn body khi tải để tránh nhấp nháy -->
+  <style>
+    body {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      background-color: #f9fafb;
+    }
+    body.ready {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Xóa hiệu ứng View Transition (gây chớp trên Chrome) */
+    /* @view-transition { navigation: auto; } */
+
+    /* Hiển thị nội dung */
+    .content-show {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Ẩn trang khác */
+    .page-hidden {
+      display: none !important;
+      opacity: 0 !important;
+    }
+
+    /* Các phần tử trang */
+    .page-transition {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .btn {
+      background-color: #3b82f6;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 9999px;
+      transition: background-color 0.2s ease;
+    }
+
+    .btn:hover {
+      background-color: #2563eb;
+    }
+
+    /* Nút về trang chủ */
+    #home-button-container {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+    }
+  </style>
+
+  <!-- Khi trang tải xong mới hiển thị -->
+  <script>
+    window.addEventListener("load", () => {
+      document.body.classList.add("ready");
+    });
+  </script>
+</head>
+
+<body>
+  <!-- Trang giới thiệu -->
+  <div id="intro-page" class="page-transition content-show">
+    <h1 class="text-3xl font-bold mb-4">Chào mừng đến với Bài 11</h1>
+    <p class="text-gray-700 mb-6">Nhấn nút bên dưới để bắt đầu hoạt động đầu tiên.</p>
+    <button class="btn" onclick="showPage('activity-21')">Bắt đầu</button>
+  </div>
+
+  <!-- Hoạt động 21 -->
+  <div id="activity-21" class="page-transition page-hidden">
+    <h2 class="text-2xl font-semibold mb-4">Hoạt động 21</h2>
+    <p class="mb-6">Nội dung hoạt động 21.</p>
+    <button class="btn" onclick="showPage('activity-22')">Tiếp theo</button>
+  </div>
+
+  <!-- Hoạt động 22 -->
+  <div id="activity-22" class="page-transition page-hidden">
+    <h2 class="text-2xl font-semibold mb-4">Hoạt động 22</h2>
+    <p class="mb-6">Nội dung hoạt động 22.</p>
+    <button class="btn" onclick="showPage('intro-page')">Quay lại đầu</button>
+  </div>
+
+  <!-- Nút trang chủ -->
+  <div id="home-button-container" class="hidden">
+    <button class="btn" onclick="showPage('intro-page')">🏠 Trang chủ</button>
+  </div>
+
+  <!-- SDK của Canva -->
+  <script src="/_sdk/element_sdk.js"></script>
+
+  <!-- JavaScript chính -->
+  <script>
+    let currentPage = "intro-page";
+
+    function showPage(pageId) {
+      const current = document.querySelector('.page-transition:not(.page-hidden)');
+      const target = document.getElementById(pageId);
+      if (!target || current === target) return;
+
+      // Ẩn trang hiện tại
+      if (current) current.classList.add('page-hidden');
+
+      // Hiển thị trang mới
+      target.classList.remove('page-hidden');
+      target.classList.add('content-show');
+
+      // Hiện nút Trang chủ nếu không phải intro
+      const homeButton = document.getElementById('home-button-container');
+      homeButton.classList.toggle('hidden', pageId === 'intro-page');
+
+      currentPage = pageId;
+    }
+  </script>
+</body>
+</html>
